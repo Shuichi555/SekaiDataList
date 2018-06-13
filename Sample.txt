@@ -1,0 +1,161 @@
+// 構成書き方サンプル
+
+App.js -----------------------------
+
+const(or let) で変数宣言
+
+const App = StackNavigator({
+Login:            { screen: LoginScreen },
+Signup:           { screen: SignupScreen },
+
+
+},
+{
+  navigationOptions: {
+      ...Platform.select({
+        android: {
+          height: 80,
+          paddingTop: 20,
+        },
+      }),
+    },
+    headerTitleStyle: {
+    },
+  },
+});
+
+export default App;
+
+
+LoginScreen.js------------------------
+
+class LoginScreen extends React.Component {
+
+//コンストラクタ(要るのか不明だけど)
+constructor(props) {
+  super(props);
+
+  //ステートの初期化を行う
+  this.state = {
+    //　例
+    email: 'user1@example.com',
+  };
+}
+
+//メソッド
+handleSubmit(){
+}
+render() {
+
+//オブジェクト等入るのも可
+
+  return (
+      <View style={styles.container}>
+      </View>
+    );
+  }
+}
+const styles = StyleSheet.create({
+container: {
+  flex: 1,
+},
+input: {
+},
+});
+export default LoginScreen;
+
+
+
+MemoListScreen.js ------------------------
+
+class MemoListScreen extends React.Component {
+  state = {
+    memoList: [],
+  }
+
+  // メソッド内ならconst できる？
+  componentWillMount() {
+
+  // const はOK？？
+  const db = firebase.firestore();
+  }
+
+ //  メソッドOK？
+  handlePress() {
+//  const { params } = this.props.navigation.state;
+//  this.props.navigation.navigate('MemoCreate', { currentUser: params.currentUser });
+    this.props.navigation.navigate('MemoCreate');
+  }
+
+// renderメソッド　で<MemoList>呼び出し（コンポーネント）
+    render() {
+      return (
+        <View style={styles.container}>
+          <MemoList memoList={this.state.memoList} navigation={this.props.navigation} />
+        </View>
+      );
+    }
+  }
+  const styles = StyleSheet.create({
+    container: {
+    },
+    memoList: {
+    },
+  });
+  export default MemoListScreen;
+
+
+
+memoList.js --------------------------
+
+
+class MemoList extends React.Component {
+
+  // 下記renderMemoの引数に{ item }とすることで、テキストデータリストitemを直接取得できる
+  renderMemo({ item }) {
+
+    return (
+      <SwipeRow
+          leftOpenValue={0}
+          rightOpenValue={-75}
+            body={
+              <TouchableHighlight onPress={() => { this.props.navigation.navigate('MemoDetail', { memo: item }); }}>
+                <View style={styles.memoListItem}>
+                  <Text style={styles.memoTitle}>{item.body.substring(0, 15)}</Text>
+                  <Timestamp style={styles.memoDate} time={item.createdOn} component={ Text } format='full' />
+                </View>
+              </TouchableHighlight>
+            }
+        right={
+          <Button danger onPress={() => AlertIOS.alert(
+              'Alert!',
+              'Delete memo?',
+              )}>
+                <Icon active name="trash" />
+              </Button>
+            }
+          />
+    );
+  } // end of renderMemo
+
+// FlatListリスト表示をreturn
+  render() {
+    return (
+      <View style={styles.memoList}>
+        <FlatList
+          data={this.props.memoList}
+          renderItem={this.renderMemo.bind(this)}
+        />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  memoList: {
+  },
+  memoListItem: {
+  },
+});
+
+export default MemoList;
