@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { StyleSheet, View, Text, Platform } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
 import axios from 'axios';
 
 import DataList from '../components/DataList';
@@ -10,16 +9,16 @@ import DataViewScreen from './DataViewScreen';
 
 
 class DataListScreen extends React.Component {
-  //コンストラクタ
+/* コンストラクタ
   constructor(props) {
     super(props);
   }
-
+*/
   state = {
     dataList: [],
+    viewData: [],
     // reactnative の検索をとりあえず
     url: `https://qiita.com/api/v2/tags/reactnative/items?page=1&per_page=10`
-
   }
 
 
@@ -34,7 +33,7 @@ class DataListScreen extends React.Component {
 
       // stateを、取得した情報をもとに変更する
       this.setState({ dataList });
-      console.log({dataList});
+      console.log('this.state.dataList:', { dataList });
     })
   }
 
@@ -57,7 +56,7 @@ class DataListScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text>DataListScreen</Text>
-        <DataList key={this.state.dataList.url} dataList={this.state.dataList} />
+        <DataList key={this.state.dataList.id} dataList={this.state.dataList} />
       </View>
     );
   }

@@ -2,21 +2,18 @@ import React from 'react';
 // import { StyleSheet, View, Text, TouchableHighlight, FlatList } from 'react-native';
 import { StyleSheet, TouchableHighlight, FlatList } from 'react-native';
 import { SwipeRow, View, Button, Icon, Text } from 'native-base';
-
-//import Timestamp from 'react-timestamp';
-//import Moment from 'react-moment';
-//import 'moment-timezone';
-
+import { Actions } from 'react-native-router-flux';
 
 class DataList extends React.Component {
   renderMemo({ item }) {
 
+//    const { dataList } = item;
     return (
           <SwipeRow
           leftOpenValue={0}
           rightOpenValue={-75}
             body={
-              <TouchableHighlight onPress={() => { this.props.navigation.navigate('DataView', { viewItem: item }); }}>
+              <TouchableHighlight onPress={() => Actions.DataView({ item })}>
                 <View style={styles.dataListItem}>
                   <Text style={styles.dataTitle}>{item.title}</Text>
                   <Text style={styles.dataDate}>Last Updated: {item.updated_at}</Text>
@@ -34,6 +31,7 @@ class DataList extends React.Component {
 
 //   <TouchableHighlight onPress={() => { this.props.navigation.navigate('MemoDetail', { memo: item }); }}>
 //                   <Text style={styles.memoDate}>Tags: {item.tags}</Text>
+//               <TouchableHighlight onPress={Actions.DataView({ viewData: item })}>
 
   render() {
     return (
@@ -43,6 +41,7 @@ class DataList extends React.Component {
     );
   }
 }
+//        <FlatList data={this.props.dataList} renderItem={ () => (renderMemo) } />
 
 const styles = StyleSheet.create({
   dataList: {
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
   },
   dataListItem: {
     padding: 16,
+    height: 100,
     backgroundColor: '#fff',
   },
   dataTitle: {
