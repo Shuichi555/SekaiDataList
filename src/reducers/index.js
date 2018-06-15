@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 
-import imageUrls from './imageUrls';
+import searchData from './searchData';
 import buttonText from './buttonText';
 
-export default combineReducers({ imageUrls, buttonText });
+export default combineReducers({ searchData, buttonText });

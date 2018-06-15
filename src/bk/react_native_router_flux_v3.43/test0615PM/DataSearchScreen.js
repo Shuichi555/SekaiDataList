@@ -6,10 +6,9 @@ import axios from 'axios';
 
 import { NavigationActions } from 'react-navigation';
 
-import { Provider } from 'react-redux';
+//import { Provider } from 'react-redux';
 
 import DataList from '../components/DataList';
-import DataViewScreen from './DataViewScreen';
 
 
 class DataSearchScreen extends React.Component {
@@ -78,7 +77,7 @@ class DataSearchScreen extends React.Component {
       console.log('dataList: ', this.state.dataList);
 //      console.log('backupUrl: ', this.state.backupUrl);
 
-      this.props.navigation.navigate({ routeName:'Home' });
+//      this.props.navigation.navigate({ routeName:'Home' });
 
     });
 

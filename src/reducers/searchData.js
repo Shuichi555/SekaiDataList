@@ -3,7 +3,7 @@ const initialState = [];
 
 // function
 // const imageUrls = (state.action) => {
-const imageUrls = (state = initialState, action) => {
+const searchData = (state = initialState, action) => {
   switch (action.type) {
     case 'RECEIVE_DATA':
       // changed for using action object
@@ -15,4 +15,4 @@ const imageUrls = (state = initialState, action) => {
   }
 };
 
-export default imageUrls;
+export default searchData;
