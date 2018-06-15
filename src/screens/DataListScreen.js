@@ -2,65 +2,38 @@
 
 import React from 'react';
 import { StyleSheet, View, Text, Platform } from 'react-native';
-import axios from 'axios';
+//import axios from 'axios';
 
 import DataList from '../components/DataList';
 import DataViewScreen from './DataViewScreen';
 
 
 class DataListScreen extends React.Component {
-/* コンストラクタ
-  constructor(props) {
-    super(props);
-  }
-*/
-  state = {
-    dataList: [],
-    viewData: [],
-    // reactnative の検索をとりあえず
-    url: `https://qiita.com/api/v2/tags/reactnative/items?page=1&per_page=10`
-  }
-
-
-  componentWillMount() {
-    axios.get(this.state.url).then((res) => {
-
-//      const data = res.data.data;
-      const dataList = res.data;
-
-      // 配列を作る
-//      const dataList = data.map;
-
-      // stateを、取得した情報をもとに変更する
-      this.setState({ dataList });
-      console.log('this.state.dataList:', { dataList });
-    })
-  }
-
-
-  /*Gighy2 ではaction creater内で実行
-    // axios でリクエストする
-    axios.get(url).then(res => {
-      const data = res.data.data;
-
-      //url 配列を作る
-      const imageUrlList = data.map
-
-      // state　を、取得した情報をもとに変更する
-      this.setState({gifUrlList: })
-  */
-
+// componentWillMount動いていない?理由不明
 
 
   render() {
+
+      const url = this.props.searchUrl;
+      console.log('DataListScreen: url: ', url);
+
+//    const dataList = this.state.dataList;
+//    console.log('this.state.dataList@DataListScreen: ', dataList);
+//    const items = this.props.dataList;
+//    console.log('props.dataList@DataListScreen: ', items);
+
+//    console.log('this.state.dataList@DataListScreen: ', this.state.dataList );
     return (
       <View style={styles.container}>
         <Text>DataListScreen</Text>
-        <DataList key={this.state.dataList.id} dataList={this.state.dataList} />
       </View>
     );
   }
 }
+
+// <DataList key={this.state.dataList.id} dataList={this.state.dataList} />
+
+//        <DataList dataList={this.state.dataList} />
 
 //        <MemoList memoList={this.state.dataList} />
 

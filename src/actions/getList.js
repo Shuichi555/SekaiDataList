@@ -1,5 +1,6 @@
 import callApi from '../APIs/callApi';
 
+/*
 // #68 for buttonText
 //action creater　に typeのみセット
 const startRequest = () => {
@@ -15,16 +16,17 @@ const receiveData = data => {
     payload: data
   };
 };
+*/
 
 // word(URL)を引数に取る
 //function を返す必要がある
-const getUrls = word => {
+const getList = (word, num) => {
   return dispatch => {
     // #68 add dispatch for buttonText
     dispatch(startRequest());
 
     //promise オブジェクトが返ってくる
-    callAPI(word).then(res => {
+    callApi(word, num).then(res => {
       const data = res.data.data;
       const imageUrlList = data.map(item => item.images.downsized.url);
 
@@ -34,4 +36,4 @@ const getUrls = word => {
   };
 };
 
-export default getUrls;
+export default getList;

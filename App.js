@@ -1,81 +1,48 @@
 // use react-navigation, because react-native version is 0.55.4
 
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-// use react-native-router-flux V3.39.1
-import { Actions, Router, Scene } from 'react-native-router-flux';
-
-import NewDataListScreen from './src/screens/NewDataListScreen';
+import DataListScreen from './src/screens/DataListScreen';
 import DataViewScreen from './src/screens/DataViewScreen';
-// import DataListScreen from './src/screens/DataListScreen';
+import DataSearchScreen from './src/screens/DataSearchScreen';
 
-
-const scenes = Actions.create(
-  <Scene key="root">
-    <Scene key="NewDataList" initial component={NewDataListScreen} title="NewDataList" />
-    <Scene key="DataView" component={DataViewScreen} title="DataView" />
-  </Scene>
+const App = StackNavigator(
+  {
+    DataSearch: { screen: DataSearchScreen },
+    Home: { screen: DataListScreen },
+    DataView: { screen: DataViewScreen },
+  },
+/*  {
+    initialRouteName: 'Home',
+  },
+*/  {
+    navigationOptions: {
+      headerTitle: "SekaiDataList!",
+      headerBackTitle: null,
+      headerTintColor: '#fff',
+      headerStyle: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        backgroundColor: '#265366',
+        ...Platform.select({
+          android: {
+            height: 80,
+            paddingTop: 20,
+          },
+        }),
+      },
+      headerTitleStyle: {
+        color: '#fff',
+      },
+    },
+  }
 );
 
-//     <Scene key="DataList" initial component={DataListScreen} title="DataList" />
-
-
-export default class App extends React.Component {
-  render() {
-    return (
-      <Router scenes={scenes} />
-    );
-  }
-}
-
-/* https://github.com/aksonov/react-native-router-flux/issues/2253
-const App = () => {
-  return (
-    <Scene key="root">
-      <Scene key="DataList" initial component={DataListScreen} title="DataList" />
-      <Scene key="DataView" component={DataViewScreen} title="DataView" />
-    </Scene>
-  );
-}
 export default App;
-*/
-
-
-/*
-const App = createStackNavigator({
-  Home: { screen: DataListScreen },
-  DataView: { screen: DataViewScreen },
-},
-{
-  initialRouteName: 'Home',
-},
-{
-  navigationOptions: {
-    headerTitle: "SekaiDataList!",
-    headerBackTitle: null,
-    headerTintColor: '#fff',
-    headerStyle: {
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.8,
-      shadowRadius: 2,
-      backgroundColor: '#265366',
-      ...Platform.select({
-        android: {
-          height: 80,
-          paddingTop: 20,
-        },
-      }),
-    },
-    headerTitleStyle: {
-      color: '#fff',
-    },
-  },
-});
-*/
-
-// export default App;
 
 /*
 

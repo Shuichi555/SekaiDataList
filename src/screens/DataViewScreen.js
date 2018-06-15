@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { WebView, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 class DataViewScreen extends React.Component {
 /*
@@ -34,7 +33,7 @@ class DataViewScreen extends React.Component {
 //    const dataUrlActions = Actions.state.viewItem.url;
 //    console.log(dataUrlActions);
 
-    return(
+    return (
       <WebView
         source={{uri: `https://medium.com/async-la/react-navigation-stacks-tabs-and-drawers-oh-my-92edd606e4db`}}
         style={{marginTop: 20}}
