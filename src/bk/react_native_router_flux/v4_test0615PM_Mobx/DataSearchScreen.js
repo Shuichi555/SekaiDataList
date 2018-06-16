@@ -4,8 +4,8 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableHighlight, Platform } from 'react-native';
 import axios from 'axios';
 
-// import { Scene, Router, Actions, Reducer, ActionConst, Overlay, Tabs, Modal, Drawer, Stack, Light } from 'react-native-router-flux';
-// import { observer } from 'mobx-react/native';
+import { Scene, Router, Actions, Reducer, ActionConst, Overlay, Tabs, Modal, Drawer, Stack, Light } from 'react-native-router-flux';
+import { observer } from 'mobx-react/native';
 
 
 import DataList from '../components/DataList';
@@ -13,12 +13,14 @@ import DataViewScreen from './DataViewScreen';
 
 
 class DataSearchScreen extends React.Component {
+
 /*
   props = {
     pheadUrl: 'https://qiita.com/api/v2/tags/',
     ptailUrl: '/items?page=1&per_page=',
+
   }
-*/
+
   state = {
     //不要かも？　dataList空配列
     dataList: {},
@@ -27,7 +29,7 @@ class DataSearchScreen extends React.Component {
     //検索キーワード(テスト用初期値)
     searchWord: 'ReactNative',
     //取得データ件数(初期値)
-    searchNum: '10',
+    searchNum: '2',
   }
 
   async handleSubmit() {
@@ -44,7 +46,7 @@ class DataSearchScreen extends React.Component {
 
       // stateを、取得した情報をもとに変更する
       this.setState({
-        dataList:   dataList,
+        dataList:     dataList,
         searchUrl:  finUrl,
         searchWord: search,
         searchNum:  limit
@@ -53,13 +55,7 @@ class DataSearchScreen extends React.Component {
 //      console.log('dataList: ', this.state.dataList);
 //      console.log('backupUrl: ', this.state.backupUrl);
 
-      this.props.navigation.navigate('Home',
-        {
-          dataList: dataList,
-          searchUrl: finUrl,
-          searchWord: search,
-          searchNum: limit,
-        });
+//      this.props.navigation.navigate({ routeName:'Home' });
 
     });
 
@@ -97,6 +93,18 @@ class DataSearchScreen extends React.Component {
         </Text>
       </TouchableHighlight>
       </View>
+    );
+  }
+}
+*/
+
+  render() {
+    return (
+    <View style={styles.container}>
+    <Text style={styles.title}>
+      Qiita キーワード検索
+    </Text>
+    </View>
     );
   }
 }

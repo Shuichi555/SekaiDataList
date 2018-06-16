@@ -5,27 +5,24 @@ import { SwipeRow, View, Button, Icon, Text } from 'native-base';
 
 class DataList extends React.Component {
 /*
-  renderData({ dataList }) {
+  state = {
+    renderItems: {},
+  }
+*/
+  renderData() {
 
-    // 表示する要素を格納する配列
-    const list = [];
+    const propdata = this.props.navigation.state.params;
+    console.log('propdata@DataList: ', propdata);
 
-    //test
-    console.log('props.dataList@DataList.js: ', this.props.dataList);
-//    console.log('state.dataList@DataList.js: ', this.state.dataList);
-
-
-/*
-//    const { dataList } = item;
     return (
           <SwipeRow
           leftOpenValue={0}
           rightOpenValue={-75}
             body={
-              <TouchableHighlight onPress={() => this.props.navigation.navigate('DataView', {})}>
+              <TouchableHighlight onPress={() => this.props.navigation.navigate('DataView', {url: items.url})}>
                 <View style={styles.dataListItem}>
-                  <Text style={styles.dataTitle}>{item.title}</Text>
-                  <Text style={styles.dataDate}>Last Updated: {item.updated_at}</Text>
+                  <Text style={styles.dataTitle}>{propdata.title}</Text>
+                  <Text style={styles.dataDate}>Last Updated: {propdata.updated_at}</Text>
                 </View>
               </TouchableHighlight>
             }
@@ -36,8 +33,7 @@ class DataList extends React.Component {
             }
           />
     );
-*/
-//  }
+  }
 
 //   <TouchableHighlight onPress={() => { this.props.navigation.navigate('MemoDetail', { memo: item }); }}>
 //                   <Text style={styles.memoDate}>Tags: {item.tags}</Text>
@@ -45,14 +41,19 @@ class DataList extends React.Component {
 
 
   render() {
-//    const dataList = this.state.dataList;
+//    const propdata = this.props.navigation.state.params;
+//    const items = propdata.dataList;
+//    console.log('items@render: ', items);
+
     return (
       <View style={styles.dataList}>
         <Text>Datalist.render() called</Text>
+        <FlatList data={this.props.dataList} renderItem={this.renderData.bind(this)} />
       </View>
     );
   }
 }
+
 //        <FlatList data={this.props.dataList} renderItem={ () => (renderMemo) } />
 //        <FlatList data={dataList} renderItem={this.renderData.bind(this)} />
 

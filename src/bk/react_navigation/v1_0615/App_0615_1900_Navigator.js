@@ -4,6 +4,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Platform, SafeAreaView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
+import { Provider } from 'mobx-react';
+
 import DataListScreen from './src/screens/DataListScreen';
 import DataViewScreen from './src/screens/DataViewScreen';
 import DataSearchScreen from './src/screens/DataSearchScreen';
@@ -42,8 +44,7 @@ const Navigator = StackNavigator(
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#fff',
-//    backgroundColor: '#272C36',
+    backgroundColor: '#272C36',
   },
   navigator: {
     backgroundColor: '#272C36',
@@ -52,33 +53,13 @@ const styles = StyleSheet.create({
 
 // SafeAreaView_onlyForIOS
 export default class App extends React.Component {
-
   render() {
     return (
-      <SafeAreaView style={styles.safeArea}>
-        <Navigator style={styles.navigator} />
-      </SafeAreaView>
+      <Provider {...stores}>
+        <SafeAreaView style={styles.safeArea}>
+          <Navigator style={styles.navigator} />
+        </SafeAreaView>
+      </Provider>
     );
   }
 }
-
-/* for Mobx
-import { Provider } from 'mobx-react';
-import { observerable } from 'mobx';
-import ObservableNavStore from './src/components/ObservableNavStore';
-
-stores:{
-  navStore: ObservableNavStore,
-};
-
-render() {
-  return (
-    <Provider {...stores}>
-      <SafeAreaView style={styles.safeArea}>
-        <Navigator style={styles.navigator} />
-      </SafeAreaView>
-    </Provider>
-  );
-}
-}
-*/

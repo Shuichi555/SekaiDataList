@@ -1,26 +1,15 @@
 import React, { Component } from 'react';
-import { WebView, View } from 'react-native';
+import { WebView } from 'react-native';
 
 class DataViewScreen extends React.Component {
-/*
-  state = {
-    viewData: [],
-//    viewData: {},
-  }
-*/
-
-/*
-  componentWillMount() {
-//    console.log(this.state.dataList);
-
-    const { viewData } = Actions.state;
-    this.setState({ viewData });
-
-    console.log(this.state.viewData.url);
-  }
-*/
 
   render() {
+
+    const propdata = this.props.navigation.state.params;
+    const url = propdata.url;
+
+    console.log('url: ', url);
+
 //    const { item } = this.state.item;
 //    console.log('item @DataViewScreen: ', { item });
 
@@ -35,8 +24,8 @@ class DataViewScreen extends React.Component {
 
     return (
       <WebView
-        source={{uri: `https://medium.com/async-la/react-navigation-stacks-tabs-and-drawers-oh-my-92edd606e4db`}}
-        style={{marginTop: 20}}
+        source={{ uri: url }}
+        style={{ marginTop: 20 }}
       />
     );
   }
