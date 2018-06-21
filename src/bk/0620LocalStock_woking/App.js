@@ -7,12 +7,15 @@ import { StackNavigator } from 'react-navigation';
 import DataListScreen from './src/screens/DataListScreen';
 import DataViewScreen from './src/screens/DataViewScreen';
 import DataSearchScreen from './src/screens/DataSearchScreen';
+import LocalStockScreen from './src/screens/LocalStockScreen';
+
 
 const Navigator = StackNavigator(
   {
     DataSearch: { screen: DataSearchScreen },
     Home: { screen: DataListScreen },
     DataView: { screen: DataViewScreen },
+    LocalStock: { screen: LocalStockScreen },
   },
   {
     navigationOptions: {
@@ -24,7 +27,7 @@ const Navigator = StackNavigator(
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
-        backgroundColor: '#55c500',
+        backgroundColor: '#265366',
         ...Platform.select({
           android: {
             height: 80,
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
 //    backgroundColor: '#272C36',
   },
   navigator: {
-    backgroundColor: '#55c500',
+    backgroundColor: '#272C36',
   },
 });
 
@@ -62,11 +65,7 @@ export default class App extends React.Component {
   }
 }
 
-//     backgroundColor: '#272C36',
-
 /* for Mobx
-
-#55c500
 import { Provider } from 'mobx-react';
 import { observerable } from 'mobx';
 import ObservableNavStore from './src/components/ObservableNavStore';

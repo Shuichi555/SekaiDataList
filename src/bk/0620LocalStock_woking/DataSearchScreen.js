@@ -13,12 +13,7 @@ import DataViewScreen from './DataViewScreen';
 
 
 class DataSearchScreen extends React.Component {
-/*
-  props = {
-    pheadUrl: 'https://qiita.com/api/v2/tags/',
-    ptailUrl: '/items?page=1&per_page=',
-  }
-*/
+
   state = {
     //不要かも？　dataList空配列
     dataList: {},
@@ -27,10 +22,24 @@ class DataSearchScreen extends React.Component {
     //検索キーワード(テスト用初期値)
     searchWord: 'ReactNative',
     //取得データ件数(初期値)
-    searchNum: '20',
+    searchNum: '10',
   }
-
+/*  props = {
+    pheadUrl: 'https://qiita.com/api/v2/tags/',
+    ptailUrl: '/items?page=1&per_page=',
+    stockData: {},
+  }
+*/
   async handleSubmit() {
+    // navigationで渡ってくるオブジェクト
+    const propdata = this.props.navigation.state.params;
+
+    // 既存ストックデータ（各画面内で受け渡ししている）
+//    const { stockData } = propdata.stocks;
+    const stockData = [];
+    const newData = [];
+//    console.log('stockData: DataSearchScreen: ', stockData);
+
     const headUrl = 'https://qiita.com/api/v2/tags/';
     const tailUrl = '/items?page=1&per_page=';
 
@@ -59,6 +68,8 @@ class DataSearchScreen extends React.Component {
           searchUrl: finUrl,
           searchWord: search,
           searchNum: limit,
+          stockData,
+          newData,
         });
 
     });
@@ -106,7 +117,7 @@ const styles = StyleSheet.create({
       flex: 1,
       width: '100%',
       padding: 24,
-      backgroundColor: '#fff',
+      backgroundColor: '#FFFDF6',
     },
     input: {
       backgroundColor: '#eee',
@@ -142,8 +153,6 @@ const styles = StyleSheet.create({
       fontSize: 16,
     },
   });
-
-// backgroundColor: '#FFFDF6',
 
 
 export default DataSearchScreen;

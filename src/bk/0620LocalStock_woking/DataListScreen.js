@@ -11,6 +11,55 @@ import { SwipeRow, View, Button, Icon, Text } from 'native-base';
 
 
 class DataListScreen extends React.Component {
+/*
+  static navigationOptions = ({ navigation }) => {
+
+    const { params = {} } = navigation.state;
+
+    return {
+      headerRight: (
+        <Button
+        title='About'
+        onPress={() => params.handleSubmit()} />
+      )
+    }
+  };
+
+  state = {
+    url: '',
+    stockData: {},
+  }
+
+  handleSubmit(url) {
+    const propdata = this.props.navigation.state.params;
+
+    const { stockData } = propdata.stockData;
+
+    this.props.navigation.navigate('DataView', {
+      url,
+      stockData,
+    });
+  }
+*/
+/*
+<TouchableHighlight
+  onPress={() =>
+  this.props.navigation.navigate('DataView', {
+    url: item.url,
+    stockData,
+  })}
+>
+*/
+
+/*
+{ navigationOptions: () =>
+  ({ header: (navigation) => ({
+    title: 'add to stocks',
+    right: <Button title='About' onPress={() =>
+      navigation.navigate('LocalStock')} />}),
+  })},
+
+*/
 
 /** ！！！とっても重要！！！
 * FlatList内で使う"item"は、ただ単なる"そのリスト内のアイテム"
@@ -23,7 +72,17 @@ _keyExtractor = (item) => item.id;
 
 
   render() {
+
+//    console.log(this.props.navigation);
+
     const propdata = this.props.navigation.state.params;
+
+
+    const stockData = propdata.stockData;
+//    this.setState({ stockData });
+
+    console.log('stockData@DataListScreen: ', stockData);
+//    console.log('state.stockData@DataListScreen: ', this.state.stockData);
 
 //    const url = propdata.searchUrl;
     const items = propdata.dataList;
@@ -31,31 +90,55 @@ _keyExtractor = (item) => item.id;
     const limit = propdata.searchNum;
     const results = items.length;
 
-//    const headtitle = `SearchWord: ${search}, #ofQuery: ${limit}, #ofResults: ${results}`;
-//         <Text>{headtitle}</Text>
-
+    const headtitle = `Word: ${search}, #Query: ${limit}, #Results: ${results}`;
 //    console.log('props.dataList@DataListScreen: ', items);
 //    console.log('items[0].title: ', items[0].title);
-//    console.log('this.state.dataList@DataListScreen: ', this.state.dataList );
+//    console.log('this.state.dataList@DataListScreen: ', items);
 
     return (
       <View style={styles.container}>
+        <Text>{headtitle}</Text>
         <FlatList
           data={items}
           keyExtractor={this._keyExtractor}
           renderItem={({ item }) =>
-                <TouchableHighlight onPress={() => this.props.navigation.navigate('DataView', {url: item.url})}>
+            (<SwipeRow
+              leftOpenValue={0}
+              rightOpenValue={-75}
+              body={
+                <TouchableHighlight
+                  onPress={() =>
+                  this.props.navigation.navigate('DataView', {
+                    url: item.url,
+                    stockData,
+                  })}
+                >
                   <View style={styles.dataListItem}>
                     <Text style={styles.dataTitle}>{item.title}</Text>
                     <Text style={styles.dataDate}>Last Updated: {item.updated_at}</Text>
                   </View>
                 </TouchableHighlight>
+              }
+              right={
+                <Button danger
+                  onPress={() => this.props.navigation.navigate('LocalStock', {
+                  url: item.url,
+                  newData: item,
+                  stockData,
+                })} >
+                  <Icon active name="trash" />
+                </Button>
+              }
+            />)
           }
         />
       </View>
     );
   }
 }
+
+//     <Button danger onPress={() => alert('Trash')}>
+
 
 const styles = StyleSheet.create({
   container: {
